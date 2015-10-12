@@ -4,5 +4,4 @@
 # Grunt
 node_modules
 bower_components
-www/dist/*
-*.sass*
+www/**/*

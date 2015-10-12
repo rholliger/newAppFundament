@@ -3,31 +3,31 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-sass');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         coffee: {
             compile: {
                 files: {
-                    "www/dist/js/app.js": ["src/js/*.coffee"]
+                    "www/js/app.js": ["src/js/*.coffee"]
                 }
             }
         },
         sass: {
+            options: {
+                outputStyle: "compressed"
+            },
             dist: {
-                options: {
-                    style: "compressed"
-                },
                 files: {
-                    "www/dist/styles/main.css": "src/styles/main.sass"
+                    "www/css/main.css": "src/styles/main.sass"
                 }
             }
         },
         uglify: {
             www: {
-                src: "www/dist/js/app.js",
-                dest: "www/dist/js/app.min.js"
+                src: "www/js/app.js",
+                dest: "www/js/app.min.js"
             }
         },
         connect: {
