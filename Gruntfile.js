@@ -1,17 +1,25 @@
 module.exports = function(grunt) {
-    grunt.loadNpmTasks("grunt-contrib-coffee");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('coffeeify');
+    grunt.loadNpmTasks('uglifyify');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        coffee: {
-            compile: {
-                files: {
-                    "www/js/app.js": ["src/js/*.coffee"]
+
+        browserify: {
+            options: {
+                browserifyOptions: {
+                    debug: true,
+                    transform: ["coffeeify", "uglifyify"],
+                    extensions: [".coffee"]
                 }
+            },
+            dev: {
+                src: ["src/js/*.coffee"],
+                dest: "www/js/app.js"
             }
         },
         sass: {
@@ -22,12 +30,6 @@ module.exports = function(grunt) {
                 files: {
                     "www/css/main.css": "src/styles/main.sass"
                 }
-            }
-        },
-        uglify: {
-            www: {
-                src: "www/js/app.js",
-                dest: "www/js/app.min.js"
             }
         },
         connect: {
@@ -45,11 +47,11 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: "src/js/*.coffee",
-                tasks: ["coffee", "uglify"]
+                tasks: ["browserify"]        
             },
             styles: {
                 files: "src/styles/*.sass",
-                tasks: ["sass"]
+                tasks: ["sass"]        
             },
             html: {
                 files: "www/index.html"
@@ -58,9 +60,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("default", [
-        "coffee",
+        "browserify",
         "sass",
-        "uglify",
         "connect:server",
         "watch"
     ]);
