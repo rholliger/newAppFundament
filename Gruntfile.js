@@ -43,11 +43,12 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-                livereload: true
+                livereload: true,
+                spawn: false
             },
             scripts: {
                 files: "src/js/*.coffee",
-                tasks: ["browserify"]        
+                tasks: ["browserify"]
             },
             styles: {
                 files: "src/styles/*.sass",
