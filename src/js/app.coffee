@@ -1,4 +1,7 @@
+component = require "./component"
+
 init = ->
-    console.log "Initialized AppJS"
+    console.log "Initialized App JS"
+    console.log component.getName()
 
 init()
