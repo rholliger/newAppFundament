@@ -11,6 +11,7 @@
     "load-grunt-tasks": "latest",
     "grunt-browserify": "latest",
     "coffeeify": "latest",
-    "uglifyify": "latest"
+    "uglifyify": "latest",
+    "coffee-reactify": "latest"
   }
 }

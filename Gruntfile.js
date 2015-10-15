@@ -9,7 +9,9 @@ module.exports = function(grunt) {
         concat: {
             packages: {
                 src: [
-                    packageDirectory+"/jquery/dist/jquery.js"
+                    packageDirectory+"/jquery/dist/jquery.js",
+                    packageDirectory+"/react/react.js",
+                    packageDirectory+"/react/react-dom.js"
                 ],
                 dest: "www/js/packages.js"
             }
@@ -24,7 +26,7 @@ module.exports = function(grunt) {
         browserify: {
             options: {
                 browserifyOptions: {
-                    transform: ["coffeeify", "uglifyify"],
+                    transform: ["coffee-reactify", "uglifyify"],
                     extensions: [".coffee"]
                 }
             },

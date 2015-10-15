@@ -1,6 +1,6 @@
-component =
-	_name: "Component"
-	getName: ->
-		@_name
+Component = React.createClass(
+	render: ->
+		<h1>Hello React!</h1>
+)
 
-module.exports = component
+module.exports = Component
