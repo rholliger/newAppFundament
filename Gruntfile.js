@@ -1,18 +1,29 @@
 module.exports = function(grunt) {
-    grunt.loadNpmTasks("grunt-contrib-connect");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('coffeeify');
-    grunt.loadNpmTasks('uglifyify');
+    require('load-grunt-tasks')(grunt);
+
+    var packageDirectory = "bower_components"
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
+        concat: {
+            packages: {
+                src: [
+                    packageDirectory+"/jquery/dist/jquery.js"
+                ],
+                dest: "www/js/packages.js"
+            }
+        },
+        uglify: {
+            packages: {
+                files: {
+                    "www/js/packages.min.js": "www/js/packages.js"
+                }
+            }
+        },
         browserify: {
             options: {
                 browserifyOptions: {
-                    debug: true,
                     transform: ["coffeeify", "uglifyify"],
                     extensions: [".coffee"]
                 }
@@ -61,6 +72,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("default", [
+        "concat:packages",
+        "uglify:packages",
         "browserify",
         "sass",
         "connect:server",

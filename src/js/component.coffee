@@ -1,6 +1,6 @@
 component =
-    _name: "Testmodule"
-    getName: ->
-        return @_name
+	_name: "Component"
+	getName: ->
+		@_name
 
 module.exports = component
